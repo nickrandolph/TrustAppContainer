@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="VanillaUWPApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VanillaUWPApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <Button Content="Write to Temp folder"
+                    HorizontalAlignment="Stretch"
+                    Click="TempWriteButtonClick"
+                    Margin="12" />
+            <Button Content="Write to AppData folder"
+                    HorizontalAlignment="Stretch"
+                    Margin="12"
+                    Click="AppDataWriteButtonClick" />
+        </StackPanel>
+    </Grid>
+</Page>
