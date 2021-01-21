@@ -1,0 +1,17 @@
+﻿<Window x:Class="SparseWPFApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+            <TextBlock x:Name="IdentityText" Text="Running...."/>
+            <Button Content="Register" 
+                    Click="RegisterClick" Margin="10"/>
+            <Button Content="Unregister" 
+                    Click="UnregisterClick" Margin="10"/>
+            <Button Content="Restart" 
+                    Click="RestartClick" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Window>

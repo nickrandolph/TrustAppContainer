@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows10.0.19041.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="package.msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="package.msix">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DesktopBridge.Helpers" Version="1.2.2" />
+  </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="copy &quot;$(SolutionDir)\SparseWPFAppPackaged\package.appxmanifest&quot; &quot;$(SolutionDir)\SparseWPFAppPackaged\appxmanifest.xml&quot; /y&#xD;&#xA;&quot;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\makeappx&quot; pack /d &quot;$(SolutionDir)\SparseWPFAppPackaged&quot; /p &quot;$(ProjectDir)\package.msix&quot; /nv /o&#xD;&#xA;&quot;C:\Program Files (x86)\Windows Kits\10\bin\10.0.19041.0\x64\signtool&quot; sign /fd SHA256 /a /f &quot;$(SolutionDir)\signingkey.pfx&quot; /p &quot;password&quot; &quot;$(ProjectDir)\package.msix&quot;&#xD;&#xA;" />
+  </Target>
+</Project>
