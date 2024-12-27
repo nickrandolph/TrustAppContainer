@@ -88,6 +88,8 @@
     <Exec Command='"$(TargetPlatformSdkPath)bin\$(TargetPlatformVersion)\x64\makeappx.exe" pack /d "$(MSBuildProjectDirectory)" /p "$(MSBuildProjectDirectory)\bin\$(MSBuildProjectName).msix" /nv /o' />
 
     <!-- Add signing step here if desired -->
+    <!--<Message Text='Executing signtool.exe sign /fd SHA256 /a /f "$(SolutionDir)signingkey.pfx" /p "****" "$(MSBuildProjectDirectory)\bin\$(MSBuildProjectName).msix' Importance="high"/>
+    <Exec Command='"$(TargetPlatformSdkPath)bin\$(TargetPlatformVersion)\x64\signtool.exe" sign /fd SHA256 /a /f "$(SolutionDir)signingkey.pfx" /p "password" "$(MSBuildProjectDirectory)\bin\$(MSBuildProjectName).msix"' />-->
 
     <Message Text="Cleaning up appxmanifest.xml" Importance="high" />
     <Delete Files="$(MSBuildProjectDirectory)\appxmanifest.xml" />
