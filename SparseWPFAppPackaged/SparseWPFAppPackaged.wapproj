@@ -72,4 +72,27 @@
     <Content Include="Images\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
+
+  <!-- Custom target that overrides the BuildDependsOn targets (aka the whole build)-->
+  <Target Name="SparseBuild">
+    <Message Text="Running Sparse Package Build..." Importance="high" />
+
+    <Message Text="Copying Package.appxmanifest -> appxmanifest.xml" Importance="high"/>
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\Package.appxmanifest" DestinationFiles="$(MSBuildProjectDirectory)\appxmanifest.xml" />
+
+    <Message Text="Deleting previous build." Importance="high" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\bin\" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\obj\" />
+
+    <Message Text='Executing makeappx.exe pack /d "$(MSBuildProjectDirectory)" /p "$(MSBuildProjectDirectory)\bin\$(MSBuildProjectName).msix" /nv /o' Importance="high"/>
+    <Exec Command='"$(TargetPlatformSdkPath)bin\$(TargetPlatformVersion)\x64\makeappx.exe" pack /d "$(MSBuildProjectDirectory)" /p "$(MSBuildProjectDirectory)\bin\$(MSBuildProjectName).msix" /nv /o' />
+
+    <!-- Add signing step here if desired -->
+
+    <Message Text="Cleaning up appxmanifest.xml" Importance="high" />
+    <Delete Files="$(MSBuildProjectDirectory)\appxmanifest.xml" />
+  </Target>
+  <PropertyGroup>
+    <BuildDependsOn>SparseBuild</BuildDependsOn>
+  </PropertyGroup>
 </Project>
